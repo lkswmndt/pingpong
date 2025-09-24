@@ -39,11 +39,18 @@ class Player(GameSprite):
 left_platform = Player('left_platform.png', 10, win_height/2,20,80,20)
 right_platform = Player('right_platform.png', win_width-30, win_height/2,20,80,20)
 
+finish = False
 run = True
 while run:
+    for e in event.get():
+        if e.type == QUIT:
+            run = False
+
+    if not finish:
+        left_platform.update_left()
+        right_platform.update_right()
+        left_platform.reset()
+        right_platform.reset()
+
     display.update()
-    left_platform.update_left()
-    right_platform.update_right()
-    left_platform.reset()
-    right_platform.reset()
     time.delay(50)
