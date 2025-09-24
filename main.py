@@ -62,9 +62,16 @@ while run:
         tennis.rect.x += tennis_speedx
         tennis.rect.y += tennis_speedy
 
-        if sprite.collide_rect(left_platform, tennis) or sprite.collide_rect(right_platform, tennis):
+        if sprite.collide_rect(left_platform, tennis):
             tennis_speedx *= -1
-            tennis_speedy *= -1
+            offset = (tennis.rect.centery - left_platform.rect.centery) / (left_platform.rect.height / 2)
+            tennis_speedy += int(offset * 5)
+
+        
+        if sprite.collide_rect(right_platform, tennis):
+            tennis_speedx *= -1
+            offset = (tennis.rect.centery - right_platform.rect.centery) / (right_platform.rect.height / 2)
+            tennis_speedy += int(offset * 5)
         
         if tennis.rect.y > win_height-30 or tennis.rect.y < 0:
             tennis_speedy *= -1
